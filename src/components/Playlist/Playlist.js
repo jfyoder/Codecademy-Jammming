@@ -1,5 +1,5 @@
 import React from "react";
-import TrackList from "**/TrackList/TrackList.js";
+import TrackList from "../TrackList/TrackList.js";
 import "./Playlist.css";
 
 function Playlist(props) {
@@ -20,3 +20,5 @@ function Playlist(props) {
     </div>
   )
 }
+
+export default Playlist;

@@ -3,6 +3,7 @@ import './App.css';
 import SearchBar from "../SearchBar/SearchBar.js";
 import SearchResults from "../SearchResults/SearchResults.js";
 import Playlist from "../Playlist/Playlist.js";
+import Spotify from "../../util/Spotify.js";
 
 function App() {
   const [searchResults, setSearchResults] = useState([
@@ -33,7 +34,7 @@ function App() {
   }
 
   const savePlaylist = () => {
-    trackURIs = playlistTracks.map( (song) => song.id );
+    const trackURIs = playlistTracks.map( (song) => song.id );
     return trackURIs;
   }
 
@@ -45,7 +46,9 @@ function App() {
     <div>
       <h1>Ja<span className="highlight">mmm</span>ing</h1>
       <div className="App">
-        <SearchBar onSearch={search} />
+        <SearchBar
+          onSearch={search}
+        />
         <div className="App-playlist">
           <SearchResults
             searchResults={searchResults}
