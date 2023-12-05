@@ -6,15 +6,14 @@ import Playlist from "../Playlist/Playlist.js";
 import Spotify from "../../util/Spotify.js";
 
 function App() {
-  const [searchResults, setSearchResults] = useState([
-    {name: "Funk You Up", artist: "The Funking Crew", album: "Whiz!", id: 1},
-    {name: "Welcome to Hell", artist: "John Satan", album: "Thieves Inc.", id: 2},
-    {name: "The Groove", artist: "Zorro", album: "album1", id: 3}
-  ]);
+  const [searchResults, setSearchResults] = useState([]);
+//    {name: "Funk You Up", artist: "The Funking Crew", album: "Whiz!", id: 1},
+//    {name: "Welcome to Hell", artist: "John Satan", album: "Thieves Inc.", id: 2},
+//    {name: "The Groove", artist: "Zorro", album: "album1", id: 3}
+
   const [playlistName, setPlaylistName] = useState("My Playlist");
-  const [playlistTracks, setPlaylistTracks] = useState([
-    {name: "The Groove", artist: "Zorro", album: "album1", id: 3}
-  ]);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
+//    {name: "The Groove", artist: "Zorro", album: "album1", id: 3}
 
   const addTrack = (track) => {
     if (playlistTracks.find( (elem) => elem.id === track.id ) ) {
@@ -24,9 +23,9 @@ function App() {
   }
   
   const removeTrack = (track) => {
-    if (playlistTracks.find( (elem) => elem.id === track.id ) ) {
-      setPlaylistTracks( playlistTracks.filter( (elem) => elem.id !== track.id ) )
-    }
+    // if (playlistTracks.find( (elem) => elem.id !== track.id ) ) {
+    setPlaylistTracks( playlistTracks.filter( (elem) => elem.id !== track.id ) )
+    // }
   }
 
   const updatePlaylistName = (listName) => {
@@ -35,11 +34,18 @@ function App() {
 
   const savePlaylist = () => {
     const trackURIs = playlistTracks.map( (song) => song.id );
-    return trackURIs;
+    Spotify.savePlaylist(playlistName, trackURIs);
+    setPlaylistName("My Playlist");
+    setPlaylistTracks([]);
   }
 
   const search = (term) => {
-    alert(term);
+    Spotify.search(term)
+      .then(result => {
+        setSearchResults(result)
+        }
+      )
+    console.log(term);
   }
   
   return (

@@ -6,8 +6,10 @@ function SearchResults(props) {
   return (
     <div className="SearchResults">
       <h2>Results</h2>
-      {/* Add a TrackList component */}
-      <TrackList tracks={props.searchResults} onAdd={props.onAdd} />
+      <TrackList
+        tracks={props.searchResults}
+        onAdd={props.onAdd}
+      />
     </div>
   );
 }
